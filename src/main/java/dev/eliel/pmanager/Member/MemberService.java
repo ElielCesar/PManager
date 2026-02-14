@@ -1,12 +1,7 @@
-package dev.eliel.pmanager.domain.applicationService;
+package dev.eliel.pmanager.Member;
 
-import dev.eliel.pmanager.domain.entity.MemberModel;
-import dev.eliel.pmanager.domain.infraestructure.dto.MemberDTO;
-import dev.eliel.pmanager.domain.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 

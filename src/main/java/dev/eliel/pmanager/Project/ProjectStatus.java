@@ -1,4 +1,4 @@
-package dev.eliel.pmanager.domain.model;
+package dev.eliel.pmanager.Project;
 
 public enum ProjectStatus {
 

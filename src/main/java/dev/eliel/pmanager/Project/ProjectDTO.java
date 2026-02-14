@@ -1,10 +1,9 @@
-package dev.eliel.pmanager.domain.infraestructure.dto;
+package dev.eliel.pmanager.Project;
 
 import dev.eliel.pmanager.domain.entity.Project;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

@@ -1,9 +1,6 @@
-package dev.eliel.pmanager.domain.applicationService;
+package dev.eliel.pmanager.Project;
 
 import dev.eliel.pmanager.domain.entity.Project;
-import dev.eliel.pmanager.domain.infraestructure.dto.ProjectDTO;
-import dev.eliel.pmanager.domain.model.ProjectStatus;
-import dev.eliel.pmanager.domain.repository.ProjectRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

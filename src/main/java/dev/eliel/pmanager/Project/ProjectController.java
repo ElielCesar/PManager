@@ -1,12 +1,7 @@
-package dev.eliel.pmanager.domain.infraestructure.controller;
+package dev.eliel.pmanager.Project;
 
-import dev.eliel.pmanager.domain.applicationService.ProjectService;
-import dev.eliel.pmanager.domain.entity.Project;
-import dev.eliel.pmanager.domain.infraestructure.dto.ProjectDTO;
-import dev.eliel.pmanager.domain.repository.ProjectRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

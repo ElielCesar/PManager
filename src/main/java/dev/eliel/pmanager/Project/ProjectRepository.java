@@ -1,4 +1,4 @@
-package dev.eliel.pmanager.domain.repository;
+package dev.eliel.pmanager.Project;
 
 import dev.eliel.pmanager.domain.entity.Project;
 import org.springframework.data.jpa.repository.JpaRepository;

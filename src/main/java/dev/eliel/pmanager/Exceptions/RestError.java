@@ -1,10 +1,8 @@
-package dev.eliel.pmanager.domain.infraestructure.exception;
+package dev.eliel.pmanager.Exceptions;
 
 import lombok.Builder;
 import lombok.Data;
-import org.springframework.validation.FieldError;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data

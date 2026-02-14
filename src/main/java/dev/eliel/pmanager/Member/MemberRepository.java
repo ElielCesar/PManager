@@ -1,6 +1,5 @@
-package dev.eliel.pmanager.domain.repository;
+package dev.eliel.pmanager.Member;
 
-import dev.eliel.pmanager.domain.entity.MemberModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
