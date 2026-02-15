@@ -1,10 +1,14 @@
 package dev.eliel.pmanager.Project;
 
-import dev.eliel.pmanager.domain.entity.Project;
+import dev.eliel.pmanager.Member.MemberModel;
+import dev.eliel.pmanager.Member.MemberRepository;
+import dev.eliel.pmanager.Project.ProjectModel;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -12,31 +16,38 @@ import java.util.List;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
     public ProjectDTO createProject(ProjectDTO dto){
+        List<MemberModel> members = new ArrayList<>();
 
-        Project projeto = Project
+        if(dto.getMembersIds() != null && !dto.getMembersIds().isEmpty()){
+            members = memberRepository.findAllById(dto.getMembersIds());
+        }
+
+        ProjectModel projeto = ProjectModel
                 .builder()
                 .name(dto.getName())
                 .description(dto.getDescription())
                 .initialDate(dto.getInitialDate())
                 .finalDate(dto.getFinalDate())
                 .status(ProjectStatus.PENDING)
+                .members(members)
                 .build();
 
-        Project projetoSalvo = projectRepository.save(projeto);
+        ProjectModel projetoSalvo = projectRepository.save(projeto);
         return ProjectDTO.convertToDTO(projetoSalvo);
     }
 
     public ProjectDTO loadProject(String id){
-        Project projeto = projectRepository.findById(id)
+        ProjectModel projeto = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Projeto não encontrado!"));
         return ProjectDTO.convertToDTO(projeto);
     }
 
     public List<ProjectDTO> loadAllProject(){
-       List<Project> projects = projectRepository.findAll();
+       List<ProjectModel> projects = projectRepository.findAll();
        return projects.stream()
                .map(ProjectDTO::convertToDTO)
                .toList();
@@ -47,9 +58,11 @@ public class ProjectService {
         projectRepository.deleteById(id);
     }
 
+
+
     @Transactional
     public ProjectDTO updateProject(String id, ProjectDTO dto){
-        Project projeto = projectRepository.findById(id)
+        ProjectModel projeto = projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Projeto não encontrado"));
 
         projeto.setName(dto.getName());
@@ -63,7 +76,13 @@ public class ProjectService {
             throw new RuntimeException("Status inválido! Use: PENDING, IN_PROGRESS ou FINISHED");
         }
 
-        Project salvo = projectRepository.save(projeto);
+        // Atualizar members
+        if(dto.getMembersIds() != null){
+            List<MemberModel> members = memberRepository.findAllById(dto.getMembersIds());
+            projeto.setMembers(members);
+        }
+
+        ProjectModel salvo = projectRepository.save(projeto);
         return ProjectDTO.convertToDTO(salvo);
     }
 

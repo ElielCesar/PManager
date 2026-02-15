@@ -1,10 +1,14 @@
 package dev.eliel.pmanager.Member;
 
+import dev.eliel.pmanager.Project.ProjectModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -29,5 +33,8 @@ public class MemberModel {
 
     @Column(nullable = false)
     private Boolean deleted;
+
+    @ManyToMany(mappedBy = "members") // dentro de ProjectModel
+    private List<ProjectModel> projects = new ArrayList<>();
 
 }

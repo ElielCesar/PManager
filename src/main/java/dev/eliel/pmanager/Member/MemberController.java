@@ -16,31 +16,38 @@ public class MemberController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public MemberModel createProject(@Valid @RequestBody MemberDTO dto){
-        return memberService.createProject(dto);
+    public MemberModel createMember(@Valid @RequestBody MemberDTO dto){
+        return memberService.createMember(dto);
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public MemberDTO listProject(@PathVariable String id){
-        return  memberService.loadProject(id);
-    }
+    public MemberDTO loadMemberID(@PathVariable String id){
+        return memberService.loadMemberById(id);
 
-    @GetMapping("/all")
-    @ResponseStatus(HttpStatus.OK)
-    public List<MemberDTO> listProject(){
-        return  memberService.loadAllProject();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProject(@PathVariable String id){
-        memberService.excludeProject(id);
+    public void deleteMember(@PathVariable String id){
+        memberService.deleteMemberByID(id);
+    }
+
+    @GetMapping("/all")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MemberDTO> listAllMembers(){
+        return  memberService.loadAllMembers();
     }
 
     @PatchMapping("/{id}")
-    public MemberDTO updateProject(@PathVariable String id, @Valid @RequestBody MemberDTO dto){
-        return memberService.updateProject(id, dto);
+    public MemberDTO updateMember(@PathVariable String id, @Valid @RequestBody MemberDTO dto){
+        return memberService.updateMember(id, dto);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<MemberDTO> findAllMembers(@RequestParam(name = "email", required = false) String email){
+        return  memberService.findAllMembers(email);
     }
 
 }

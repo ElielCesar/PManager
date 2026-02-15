@@ -1,5 +1,6 @@
 package dev.eliel.pmanager.Project;
 
+import dev.eliel.pmanager.Member.MemberModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "project")
@@ -35,5 +38,14 @@ public class ProjectModel {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ProjectStatus status;
+
+    @ManyToMany
+    // tabela associativa entre duas tabelas
+    @JoinTable(
+            name = "project_member",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id")
+    )
+    private List<MemberModel> members = new ArrayList<>();
 
 }
