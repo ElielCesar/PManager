@@ -86,4 +86,23 @@ public class ProjectService {
         return ProjectDTO.convertToDTO(salvo);
     }
 
+    public List<ProjectDTO> filterProjects(String name, String memberId){
+        List<ProjectModel> projects = new ArrayList<>();
+
+        if(name != null){
+            projects = projectRepository.findByNameContainingIgnoreCase(name);
+        }
+
+        if(memberId != null){
+            projects = projectRepository.findByMembersId(memberId);
+        }
+
+        return projects
+                .stream()
+                .map(ProjectDTO::convertToDTO)
+                .toList();
+
+
+    }
+
 }

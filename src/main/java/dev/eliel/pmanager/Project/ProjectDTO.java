@@ -2,6 +2,7 @@ package dev.eliel.pmanager.Project;
 
 import dev.eliel.pmanager.Member.MemberModel;
 import dev.eliel.pmanager.Project.ProjectModel;
+import dev.eliel.pmanager.Task.TaskModel;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,6 +37,8 @@ public class ProjectDTO {
 
     private final Set<String> membersIds;
 
+    private final Set<String> tasksIds;
+
     @AssertTrue(message = "A data final não pode ser anterior a data de inicio.")
     private boolean isInitialDateMenorFinalDate(){
         return initialDate.isBefore(finalDate);
@@ -54,7 +57,13 @@ public class ProjectDTO {
                         .ofNullable(project.getMembers())
                         .orElse(List.of())
                         .stream()
-                        .map(MemberModel::getId)
+                        .map(MemberModel::getName)
+                        .collect(Collectors.toSet()),
+                Optional
+                        .ofNullable(project.getTasks())
+                        .orElse(List.of())
+                        .stream()
+                        .map(TaskModel::getTitle)
                         .collect(Collectors.toSet())
 
         );

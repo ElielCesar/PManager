@@ -43,4 +43,13 @@ public class ProjectController {
         return projectService.updateProject(id, dto);
     }
 
+    @GetMapping("/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProjectDTO> filterProjects(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String memberId
+    ) {
+        return projectService.filterProjects(name, memberId);
+    }
+
 }

@@ -1,6 +1,7 @@
 package dev.eliel.pmanager.Project;
 
 import dev.eliel.pmanager.Member.MemberModel;
+import dev.eliel.pmanager.Task.TaskModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,4 +49,6 @@ public class ProjectModel {
     )
     private List<MemberModel> members = new ArrayList<>();
 
+    @OneToMany(mappedBy = "project", orphanRemoval = true)
+    private List<TaskModel> tasks;
 }
